@@ -19,6 +19,7 @@
 
 #include <vector>
 #include <map>
+#include <unordered_map>
 
 #include <boost/test/auto_unit_test.hpp>
 
@@ -74,6 +75,24 @@ BOOST_AUTO_TEST_CASE(multi_item_map_to_string) {
   m[12] = "abc";
   m[31] = "xyz";
   BOOST_CHECK_EQUAL(to_string(m), "{12: abc, 31: xyz}");
+}
+
+BOOST_AUTO_TEST_CASE(empty_unordered_map_to_string) {
+  std::unordered_map<int, std::string> m;
+  BOOST_CHECK_EQUAL(to_string(m), "{}");
+}
+
+BOOST_AUTO_TEST_CASE(single_item_unordered_map_to_string) {
+  std::unordered_map<int, std::string> m;
+  m[12] = "abc";
+  BOOST_CHECK_EQUAL(to_string(m), "{12: abc}");
+}
+
+BOOST_AUTO_TEST_CASE(multi_item_unordered_map_to_string) {
+  std::unordered_map<int, std::string> m;
+  m[12] = "abc";
+  m[31] = "xyz";
+  BOOST_CHECK_EQUAL(to_string(m), "{31: xyz, 12: abc}");
 }
 
 BOOST_AUTO_TEST_CASE(empty_set_to_string) {

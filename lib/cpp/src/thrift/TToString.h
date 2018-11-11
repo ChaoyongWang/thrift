@@ -23,6 +23,7 @@
 #include <cmath>
 #include <limits>
 #include <map>
+#include <unordered_map>
 #include <set>
 #include <sstream>
 #include <string>
@@ -64,6 +65,9 @@ inline std::string to_string(const long double& t) {
 template <typename K, typename V>
 std::string to_string(const std::map<K, V>& m);
 
+template <typename K, typename V>
+std::string to_string(const std::unordered_map<K, V>& m);
+
 template <typename T>
 std::string to_string(const std::set<T>& s);
 
@@ -97,6 +101,13 @@ std::string to_string(const std::vector<T>& t) {
 
 template <typename K, typename V>
 std::string to_string(const std::map<K, V>& m) {
+  std::ostringstream o;
+  o << "{" << to_string(m.begin(), m.end()) << "}";
+  return o.str();
+}
+
+template <typename K, typename V>
+std::string to_string(const std::unordered_map<K, V>& m) {
   std::ostringstream o;
   o << "{" << to_string(m.begin(), m.end()) << "}";
   return o.str();
